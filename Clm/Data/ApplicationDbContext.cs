@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Clm.Models.Unit;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,6 @@ namespace Clm.Data
 			: base(options)
 		{
 		}
+		public DbSet<Units> Units { get; set; }
 	}
 }
