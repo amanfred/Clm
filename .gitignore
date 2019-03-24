@@ -7,3 +7,4 @@ Clm/obj/
 Clm/bin/Debug/netcoreapp2.1/Clm.deps.json
 Clm/bin/Debug/netcoreapp2.1/Clm.runtimeconfig.dev.json
 Clm/bin/Debug/netcoreapp2.1/Clm.runtimeconfig.json
+.vs/config/applicationhost.config
