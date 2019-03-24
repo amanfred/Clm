@@ -14,5 +14,6 @@ namespace Clm.Data
 		{
 		}
 		public DbSet<Units> Units { get; set; }
+		public DbSet<Types> Types { get; set; }
 	}
 }
