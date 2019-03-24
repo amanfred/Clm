@@ -8,6 +8,7 @@ using Clm.Models;
 
 namespace Clm.Controllers
 {
+	[Area("RegularUser")]
 	public class HomeController : Controller
 	{
 		public IActionResult Index()
