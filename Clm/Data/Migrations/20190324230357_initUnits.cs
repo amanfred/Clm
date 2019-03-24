@@ -3,29 +3,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Clm.Data.Migrations
 {
-    public partial class StartingTypesModel : Migration
+    public partial class initUnits : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Types",
+                name: "Units",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CodeId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 20, nullable: false)
+                    Name = table.Column<string>(maxLength: 200, nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    ParentId = table.Column<int>(nullable: false),
+                    TypeCodeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Types", x => x.Id);
+                    table.PrimaryKey("PK_Units", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Types");
+                name: "Units");
         }
     }
 }

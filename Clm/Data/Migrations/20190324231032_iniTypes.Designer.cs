@@ -4,14 +4,16 @@ using Clm.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Clm.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190324231032_iniTypes")]
+    partial class iniTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,8 +25,6 @@ namespace Clm.Data.Migrations
                 {
                     b.Property<int>("CodeId");
 
-                    b.Property<bool>("IsEnabled");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20);
@@ -32,11 +32,6 @@ namespace Clm.Data.Migrations
                     b.HasKey("CodeId");
 
                     b.ToTable("Types");
-
-                    b.HasData(
-                        new { CodeId = 1, IsEnabled = true, Name = "Global project" },
-                        new { CodeId = 2, IsEnabled = true, Name = "Local project" }
-                    );
                 });
 
             modelBuilder.Entity("Clm.Models.Unit.Units", b =>
@@ -56,8 +51,6 @@ namespace Clm.Data.Migrations
                     b.Property<int>("TypeCodeId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TypeCodeId");
 
                     b.ToTable("Units");
                 });
@@ -225,14 +218,6 @@ namespace Clm.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Clm.Models.Unit.Units", b =>
-                {
-                    b.HasOne("Clm.Models.Unit.Types", "Types")
-                        .WithMany()
-                        .HasForeignKey("TypeCodeId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

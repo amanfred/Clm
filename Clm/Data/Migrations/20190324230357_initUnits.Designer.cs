@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clm.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190324194856_typecodeid")]
-    partial class typecodeid
+    [Migration("20190324230357_initUnits")]
+    partial class initUnits
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,23 +20,6 @@ namespace Clm.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Clm.Models.Unit.Types", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CodeId");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Types");
-                });
 
             modelBuilder.Entity("Clm.Models.Unit.Units", b =>
                 {

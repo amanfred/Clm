@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 
 namespace NewAgeClm.Utility
 {
-	public class StaticData
+	public static class StaticData
 	{
 		public const string DefaultProductImage = "defaultImage.jpg";
 		public const string ImageFolder = @"image\ProjectImage";
+
+		//Default DB values
+		public const string DefaultDbValueGlobalProject = "Global project";
+		public const string DefaultDbValueLocalProject = "Local project";
 	}
 }

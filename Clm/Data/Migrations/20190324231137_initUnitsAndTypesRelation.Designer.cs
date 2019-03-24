@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clm.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190324193748_StartingTypesModel")]
-    partial class StartingTypesModel
+    [Migration("20190324231137_initUnitsAndTypesRelation")]
+    partial class initUnitsAndTypesRelation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,17 +23,13 @@ namespace Clm.Data.Migrations
 
             modelBuilder.Entity("Clm.Models.Unit.Types", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("CodeId");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Id");
+                    b.HasKey("CodeId");
 
                     b.ToTable("Types");
                 });
@@ -52,7 +48,11 @@ namespace Clm.Data.Migrations
 
                     b.Property<int>("ParentId");
 
+                    b.Property<int>("TypeCodeId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeCodeId");
 
                     b.ToTable("Units");
                 });
@@ -220,6 +220,14 @@ namespace Clm.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Clm.Models.Unit.Units", b =>
+                {
+                    b.HasOne("Clm.Models.Unit.Types", "Types")
+                        .WithMany()
+                        .HasForeignKey("TypeCodeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

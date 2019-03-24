@@ -21,6 +21,7 @@ namespace Clm.Models.Unit
 
 		public int TypeCodeId { get; set; }
 
-		
+		[ForeignKey("TypeCodeId")]
+		public virtual Types Types { get; set; }
 	}
 }
