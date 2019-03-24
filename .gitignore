@@ -3,3 +3,7 @@ Clm/appsettings.json
 .vs/Clm/v15/Server/sqlite3/storage.ide-shm
 .vs/Clm/v15/Server/sqlite3/storage.ide
 .vs/Clm/v15/Server/sqlite3/db.lock
+Clm/obj/
+Clm/bin/Debug/netcoreapp2.1/Clm.deps.json
+Clm/bin/Debug/netcoreapp2.1/Clm.runtimeconfig.dev.json
+Clm/bin/Debug/netcoreapp2.1/Clm.runtimeconfig.json
