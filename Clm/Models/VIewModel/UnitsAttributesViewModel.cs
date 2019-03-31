@@ -11,5 +11,7 @@ namespace Clm.Models.VIewModel
 		public Units Units { get; set; }
 
 		public IEnumerable<Types> Types { get; set; }
+
+		public IEnumerable<Statuses> Statuses { get; set; }
 	}
 }
