@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Clm.Models.Unit
 {
-	public class Types
+	public class Statuses
 	{
-
 		[DatabaseGenerated(DatabaseGeneratedOption.None), Key, Required]		
 		public int CodeId { get; set; }
 
