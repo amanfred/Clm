@@ -7,6 +7,7 @@ using Clm.Models.Unit;
 using Clm.Models.VIewModel;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
+using NewAgeClm.Utility;
 
 namespace Clm.Areas.PowerUser.Controllers
 {
@@ -45,7 +46,13 @@ namespace Clm.Areas.PowerUser.Controllers
 		// GET: Status/Create
 		public IActionResult Create()
 		{
-			
+			UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m => 
+				m.Name == StaticData.DefaultDbValueTypeGlobalProject || 
+				m.Name == StaticData.DefaultDbValueTypeLocalProject);
+			UnitsAttributesViewModel.Statuses = UnitsAttributesViewModel.Statuses
+				.Where(m =>
+				m.Name == StaticData.DefaultDbValueStatusBacklog);
 			return View(UnitsAttributesViewModel);
 		}
 
@@ -98,6 +105,42 @@ namespace Clm.Areas.PowerUser.Controllers
 			{
 				return View();
 			}
+		}
+
+		//GET method for edit
+		public async Task<IActionResult> Edit(int? id)
+		{
+			if (id == null || id < 0)
+				return NotFound();
+			
+				var unit = await _db.Units.FindAsync(id);			
+
+				if (unit == null)
+					return NotFound();
+
+			UnitsAttributesViewModel.Units = unit;
+			UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m =>
+				m.Name == StaticData.DefaultDbValueTypeGlobalProject ||
+				m.Name == StaticData.DefaultDbValueTypeLocalProject);
+			return View(this.UnitsAttributesViewModel);			
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if(ModelState.IsValid)
+			{
+				var projectFromDb = _db.Units.Where(m => m.Id == UnitsAttributesViewModel.Units.Id).FirstOrDefault();
+				projectFromDb.Name = UnitsAttributesViewModel.Units.Name;
+				projectFromDb.StatusCodeId = UnitsAttributesViewModel.Units.StatusCodeId;
+				projectFromDb.TypeCodeId = UnitsAttributesViewModel.Units.TypeCodeId;
+				projectFromDb.Description = UnitsAttributesViewModel.Units.Description;
+				await _db.SaveChangesAsync();
+				return RedirectToAction(nameof(Index));
+			}
+			return BadRequest();
 		}
 	}
 }

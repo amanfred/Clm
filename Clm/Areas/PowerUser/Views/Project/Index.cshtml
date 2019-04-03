@@ -50,7 +50,7 @@
 			//controller.Id = type.Id;
 			<tr>
 				<td>
-					<a asp-controller="Project" asp-area="RegularUser" asp-action="Edit" asp-route-id="@project.Id">
+					<a asp-controller="Project" asp-area="RegularUser" asp-action="Index" asp-route-id="@project.Id">
 						@Html.DisplayFor(m => project.Name)
 					</a>
 				</td>
@@ -69,7 +69,13 @@
 				<td>
 					@*@Html.DisplayFor(m => project.ProjectLead)*@
 				</td>
-				<td></td>
+				<td>
+					<a asp-controller="Project" asp-area="PowerUser" asp-action="Edit" asp-route-id="@project.Id" 
+						class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" style="float:right;">
+						<i class=" fas fa-edit"></i>
+					</a>
+				</td>
+				
 			</tr>
 		}
 	</table>
