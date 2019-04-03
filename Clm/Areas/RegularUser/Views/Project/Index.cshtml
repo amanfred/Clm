@@ -1,0 +1,108 @@
+﻿@model Clm.Models.Unit.Units
+@using Clm.Extensions
+
+@{
+	ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info">
+	Create new project
+</h2>
+
+
+<!--for file upload use enctype="multipart/form-data"-->
+<div class="p-4 border rounded">	
+	<div class="form-group row">
+		<div class="col-2">
+			<label asp-for="Name"></label>
+		</div>
+		<div class="col-5">
+			<input asp-for="Name" class="form-control" disabled readonly />
+		</div>			
+	</div>
+	@*<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Projects.Key"></label>
+			</div>
+			<div class="col-5">
+				<input asp-for="Projects.Key" class="form-control" />
+			</div>
+			<span asp-validation-for="Projects.Key" class="text-danger"></span>
+		</div>*@
+	@*<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Projects.ProjectLead"></label>
+			</div>
+			<div class="col-5">
+				<input asp-for="Projects.ProjectLead" class="form-control" />
+			</div>
+			<span asp-validation-for="Projects.ProjectLead" class="text-danger"></span>
+		</div>*@
+	@*<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Projects.Reporter"></label>
+			</div>
+			<div class="col-5">
+				<input asp-for="Projects.Reporter" class="form-control" />
+			</div>
+			<span asp-validation-for="Projects.Reporter" class="text-danger"></span>
+		</div>*@
+	<div class="form-group row">
+		<div class="col-2">
+			<label asp-for="Types"></label>
+		</div>
+		<div class="col-5">
+			<input asp-for="@Model.Types.Name" class="form-control" />
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-2">
+			<label asp-for="Statuses"></label>
+		</div>
+		<div class="col-5">
+			<input asp-for="@Model.Statuses.Name" class="form-control" />
+		</div>
+	</div>
+	@*<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Projects.Priorities"></label>
+			</div>
+			<div class="col-5">
+				<select asp-for="@Model.Projects.PriorityId" asp-items="Model.Priorities.ToSelectListItem(Model.Projects.PriorityId)" class="form-control"></select>
+			</div>
+		</div>*@
+	@*<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Projects.Labels"></label>
+			</div>
+			<div class="col-5">
+				<select asp-for="@Model.Projects.LabelId" asp-items="Model.Labels.ToSelectListItem(Model.Projects.LabelId)" class="form-control"></select>
+			</div>
+		</div>*@
+	@*<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Projects.Categories"></label>
+			</div>
+			<div class="col-5">
+				<select asp-for="@Model.Projects.CategoryId" asp-items="Model.Categories.ToSelectListItem(Model.Projects.CategoryId)" class="form-control"></select>
+			</div>
+		</div>*@
+
+	<div class="form-group row">
+		<div class="col-2">
+			<label asp-for="Description"></label>
+		</div>
+		<div class="col-5">
+			<textarea asp-for="Description" class="form-control"></textarea>
+		</div>			
+	</div>
+	<br />
+	<!--add two buttons-->
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" value="Create" />
+		<a asp-action="Index" asp-area="PowerUser" class="btn btn-success">Back to List</a>
+	</div>
+</div>
+
+
