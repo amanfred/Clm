@@ -70,7 +70,8 @@
 					@*@Html.DisplayFor(m => project.ProjectLead)*@
 				</td>
 				<td>
-					<a asp-controller="Project" asp-area="PowerUser" asp-action="Edit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" style="float:right;">
+					<a asp-controller="Project" asp-area="PowerUser" asp-action="Edit" asp-route-id="@project.Id" 
+						class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" style="float:right;">
 						<i class=" fas fa-edit"></i>
 					</a>
 				</td>
