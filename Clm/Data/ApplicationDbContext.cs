@@ -27,12 +27,28 @@ namespace Clm.Data
 				{
 					IsEnabled = true,
 					CodeId = 1,
-					Name = StaticData.DefaultDbValueGlobalProject
+					Name = StaticData.DefaultDbValueTypeGlobalProject
 				}, new Types
 				{
 					IsEnabled= true,
 					CodeId = 2,
-					Name = StaticData.DefaultDbValueLocalProject
+					Name = StaticData.DefaultDbValueTypeLocalProject
+				}, new Types
+				{
+					IsEnabled = true,
+					CodeId = 3,
+					Name = StaticData.DefaultDbValueTypeEpic
+				}, new Types
+				{
+					IsEnabled = true,
+					CodeId = 4,
+					Name = StaticData.DefaultDbValueTypeUserStory
+				}
+				, new Types
+				{
+					IsEnabled = true,
+					CodeId = 5,
+					Name = StaticData.DefaultDbValueTypeSubTask
 				}
 				);
 
@@ -42,37 +58,37 @@ namespace Clm.Data
 				{
 					IsEnabled = true,
 					CodeId = 1,
-					Name = StaticData.DefaultDbValueTypeBacklog
+					Name = StaticData.DefaultDbValueStatusBacklog
 				}, new Statuses
 				{
 					IsEnabled = true,
 					CodeId = 2,
-					Name = StaticData.DefaultDbValueTypeToDo
+					Name = StaticData.DefaultDbValueStatusToDo
 				}, new Statuses
 				{
 					IsEnabled = true,
 					CodeId = 3,
-					Name = StaticData.DefaultDbValueTypeInProgress
+					Name = StaticData.DefaultDbValueStatusInProgress
 				}, new Statuses
 				{
 					IsEnabled = true,
 					CodeId = 4,
-					Name = StaticData.DefaultDbValueTypeReadyToQA
+					Name = StaticData.DefaultDbValueStatusReadyToQA
 				}, new Statuses
 				{
 					IsEnabled = true,
 					CodeId = 5,
-					Name = StaticData.DefaultDbValueTypeInTest
+					Name = StaticData.DefaultDbValueStatusInTest
 				}, new Statuses
 				{
 					IsEnabled = true,
 					CodeId = 6,
-					Name = StaticData.DefaultDbValueTypeReadyToRelease
+					Name = StaticData.DefaultDbValueStatusReadyToRelease
 				}, new Statuses
 				{
 					IsEnabled = true,
 					CodeId = 7,
-					Name = StaticData.DefaultDbValueTypeDone
+					Name = StaticData.DefaultDbValueStatusDone
 				}
 				);
 		}

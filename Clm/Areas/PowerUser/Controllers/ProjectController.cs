@@ -45,6 +45,7 @@ namespace Clm.Areas.PowerUser.Controllers
 		// GET: Status/Create
 		public IActionResult Create()
 		{
+			
 			return View(UnitsAttributesViewModel);
 		}
 

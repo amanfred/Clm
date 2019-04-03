@@ -11,18 +11,20 @@ namespace NewAgeClm.Utility
 		public const string ImageFolder = @"image\ProjectImage";
 
 		//Default DB values for types
-		public const string DefaultDbValueGlobalProject = "Global project";
-		public const string DefaultDbValueLocalProject = "Local project";
+		public const string DefaultDbValueTypeGlobalProject = "Global project";
+		public const string DefaultDbValueTypeLocalProject = "Local project";
+		public const string DefaultDbValueTypeEpic = "Epic";
+		public const string DefaultDbValueTypeUserStory = "User story";		
+		public const string DefaultDbValueTypeSubTask = "Sub-task";
+		public const string DefaultDbValueTypeTask = "Task"; //will be used in the future...
 
 		//Default DB valuse for types
-		public const string DefaultDbValueTypeBacklog = "Backlog";
-		public const string DefaultDbValueTypeToDo = "To do";
-		public const string DefaultDbValueTypeInProgress = "In progress";
-		public const string DefaultDbValueTypeReadyToQA = "Ready to QA";
-		public const string DefaultDbValueTypeInTest = "In test";
-		public const string DefaultDbValueTypeReadyToRelease = "Ready to release";
-		public const string DefaultDbValueTypeDone = "Done";
-
-
+		public const string DefaultDbValueStatusBacklog = "Backlog";
+		public const string DefaultDbValueStatusToDo = "To do";
+		public const string DefaultDbValueStatusInProgress = "In progress";
+		public const string DefaultDbValueStatusReadyToQA = "Ready to QA";
+		public const string DefaultDbValueStatusInTest = "In test";
+		public const string DefaultDbValueStatusReadyToRelease = "Ready to release";
+		public const string DefaultDbValueStatusDone = "Done";
 	}
 }
