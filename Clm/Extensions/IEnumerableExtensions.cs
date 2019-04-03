@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NewAgeClm.Extensions
+namespace Clm.Extensions
 {
 	public static class IEnumerableExtensions
 	{
@@ -14,8 +14,8 @@ namespace NewAgeClm.Extensions
 				   select new SelectListItem
 				   {
 					   Text = item.GetPropertyValue("Name"),
-					   Value = item.GetPropertyValue("Id"),
-					   Selected = item.GetPropertyValue("Id").Equals(selectedValue.ToString())
+					   Value = item.GetPropertyValue("CodeId"),
+					   Selected = item.GetPropertyValue("CodeId").Equals(selectedValue.ToString())
 				   };
 		}
 	}

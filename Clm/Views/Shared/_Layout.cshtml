@@ -30,10 +30,10 @@
 						Projects
 					</a>
 					<div class="dropdown-menu" aria-labelledby="projectsMenuLink">
-						<a class="dropdown-item" asp-area="RegularUser" asp-controller="Project" asp-action="Create">Create new project</a>
+						<a class="dropdown-item" asp-area="PowerUser" asp-controller="Project" asp-action="Create">Create new project</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" asp-area="RegularUser" asp-controller="Project" asp-action="Index">View all projects</a>
-						<a class="dropdown-item" asp-area="Admin" asp-controller="ProjectAttributes" asp-action="Index">Manage project attributes</a>
+						<a class="dropdown-item" asp-area="PowerUser" asp-controller="Project" asp-action="Index">View all projects</a>
+						<a class="dropdown-item" asp-area="Admin" asp-controller="UnitsAttributes" asp-action="Index">Manage unit attributes</a>
 					</div>
 				</li>
 				<li class="nav-item dropdown">
@@ -41,7 +41,7 @@
 						Admin pages
 					</a>
 					<div class="dropdown-menu" aria-labelledby="adminPages">						
-						<a class="dropdown-item" asp-area="Admin" asp-controller="ProjectAttributes" asp-action="Index">Manage project attributes</a>
+						<a class="dropdown-item" asp-area="Admin" asp-controller="UnitsAttributes" asp-action="Index">Manage unit attributes</a>
 					</div>
 				</li>
 			</ul>

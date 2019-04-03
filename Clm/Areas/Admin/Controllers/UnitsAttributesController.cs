@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clm.Areas.Admin.Controllers
 {
+	[Area("Admin")] //always add area name
     public class UnitsAttributesController : Controller
     {
 		private readonly ApplicationDbContext _db;
@@ -20,9 +21,9 @@ namespace Clm.Areas.Admin.Controllers
 			this._db = db;
 			UnitsAttributesVM = new UnitsAttributesViewModel
 			{
-				Units = new Units(),
-				Types = db.Types.ToList(),
-				Statuses = db.Statuses.ToList()
+				Units = new Units(), //instance of units
+				Types = db.Types.ToList(), //get types from the database
+				Statuses = db.Statuses.ToList() //get statuses from the database
 			};
 		}
 

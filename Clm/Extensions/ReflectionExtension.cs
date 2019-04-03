@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NewAgeClm.Extensions
+namespace Clm.Extensions
 {
 	public static class ReflectionExtension
 	{
 		public static string GetPropertyValue<T>(this T item, string propertyName)
 		{
-			return item.GetType().GetProperty(propertyName).GetValue(item, null).ToString();
+			try
+			{
+				return item.GetType().GetProperty(propertyName).GetValue(item, null).ToString();
+			}
+			catch(Exception e)
+			{
+				return null;
+			}
 		}
 	}
 }

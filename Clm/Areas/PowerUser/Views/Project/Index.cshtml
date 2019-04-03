@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Clm.Models.Unit.Units>
+@using Clm.Models
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<br />
+@{ControllerWithId controller = new ControllerWithId();}
+<div class="row">
+	<div class="col-6">
+		<h2 class="text-info">Project list</h2>
+	</div>
+	<div class="col-6 text-right">
+
+	</div>
+</div>
+
+<br />
+<div>
+	<table class="table table-striped border">
+		<tr class="table-info">
+			<th>
+				@Html.DisplayNameFor(m => m.Name) <!--Html helper-->
+			</th>
+			<th>
+				@Html.DisplayNameFor(m => m.Statuses)
+			</th>
+			<th>
+				@*@Html.DisplayNameFor(m => m.Key)*@Key
+			</th>
+			<th>
+				@Html.DisplayNameFor(m => m.Types)
+			</th>
+			<th>
+				@*@Html.DisplayNameFor(m => m.Categories)*@Categories
+			</th>
+			<th>
+				@*@Html.DisplayNameFor(m => m.ProjectLead)*@Project Lead
+			</th>
+			<th>
+				<a asp-controller="Project" asp-area="PowerUser" asp-action="Create" class="btn btn-info" style="float:right;">
+					<i class=" fas fa-plus-square"></i>
+				</a>
+			</th>
+		</tr>
+		@{ controller.ControllerName = "Project";}
+		@foreach (var project in Model)
+		{
+			//controller.Id = type.Id;
+			<tr>
+				<td>
+					<a asp-controller="Project" asp-area="RegularUser" asp-action="Edit" asp-route-id="@project.Id">
+						@Html.DisplayFor(m => project.Name)
+					</a>
+				</td>
+				<td>
+					@Html.DisplayFor(m => project.Statuses.Name)
+				</td>
+				<td>
+					@*@Html.DisplayFor(m => project.Key)*@
+				</td>
+				<td>
+					@Html.DisplayFor(m => project.Types.Name)
+				</td>
+				<td>
+					@*@Html.DisplayFor(m => project.Categories.Name)*@
+				</td>
+				<td>
+					@*@Html.DisplayFor(m => project.ProjectLead)*@
+				</td>
+				<td></td>
+			</tr>
+		}
+	</table>
+</div>

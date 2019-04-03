@@ -1,0 +1,88 @@
+﻿@model Clm.Models.VIewModel.UnitsAttributesViewModel
+@using Clm.Models
+
+@{
+	ViewData["Title"] = "Unit attributes";
+}
+
+<br />
+@{ControllerWithId controller = new ControllerWithId();}
+<!--
+<div class="row">
+	<div class="col-6">
+		<h2 class="text-info">Types</h2>
+	</div>
+	<div class="col-6 text-right">
+
+	</div>
+</div>
+	-->
+
+<br />
+<div>
+	<table class="table table-striped border">
+		<tr class="table-info">
+			<th>
+				@Html.DisplayNameFor(m => m.Types) <!--Html helper-->
+			</th>
+			<th>Id</th>
+			<th></th>
+			<th>
+				<a asp-controller="ProjectTypes" asp-action="Create" class="btn btn-info" style="float:right;">
+					<i class=" fas fa-plus-square"></i>
+				</a>
+			</th>
+		</tr>
+		@{ controller.ControllerName = "Types";}
+		@foreach (var type in Model.Types)
+		{
+			controller.Id = type.CodeId;
+			<tr>
+				<td>
+					@Html.DisplayFor(m => type.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(m => type.CodeId)
+				</td>
+				<td>
+					<partial name="_TableButtonsWithControllerPartial" model="controller" />
+			</tr>
+		}
+	</table>
+</div>
+<hr />
+<br />
+
+<div>
+	<table class="table table-striped border">
+		<tr class="table-info">
+			<th>
+				@Html.DisplayNameFor(m => m.Statuses) <!--Html helper-->
+			</th>
+			<th>Id</th>
+			<th></th>
+			<th>
+				<a asp-controller="ProjectTypes" asp-action="Create" class="btn btn-info" style="float:right;">
+					<i class=" fas fa-plus-square"></i>
+				</a>
+			</th>
+		</tr>
+		@{ controller.ControllerName = "Statuses";}
+		@foreach (var type in Model.Statuses)
+		{
+			controller.Id = type.CodeId;
+			<tr>
+				<td>
+					@Html.DisplayFor(m => type.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(m => type.CodeId)
+				</td>
+				<td>
+					<partial name="_TableButtonsWithControllerPartial" model="controller" />
+			</tr>
+		}
+	</table>
+</div>
+<hr />
+<br />
