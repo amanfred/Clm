@@ -1,0 +1,114 @@
+﻿@model Clm.Models.VIewModel.UnitsAttributesViewModel
+@using Clm.Extensions
+
+@{
+	ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info">
+	Add unit to a project
+</h2>
+
+<form method="post" asp-action="Create">
+	<!--for file upload use enctype="multipart/form-data"-->
+	<div class="p-4 border rounded">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Units.Name"></label>
+			</div>
+			<div class="col-5">
+				<input asp-for="Units.Name" class="form-control" />
+			</div>
+			<span asp-validation-for="Units.Name" class="text-danger"></span>
+		</div>
+		@*<div class="form-group row">
+				<div class="col-2">
+					<label asp-for="Projects.Key"></label>
+				</div>
+				<div class="col-5">
+					<input asp-for="Projects.Key" class="form-control" />
+				</div>
+				<span asp-validation-for="Projects.Key" class="text-danger"></span>
+			</div>*@
+		@*<div class="form-group row">
+				<div class="col-2">
+					<label asp-for="Projects.ProjectLead"></label>
+				</div>
+				<div class="col-5">
+					<input asp-for="Projects.ProjectLead" class="form-control" />
+				</div>
+				<span asp-validation-for="Projects.ProjectLead" class="text-danger"></span>
+			</div>*@
+		@*<div class="form-group row">
+				<div class="col-2">
+					<label asp-for="Projects.Reporter"></label>
+				</div>
+				<div class="col-5">
+					<input asp-for="Projects.Reporter" class="form-control" />
+				</div>
+				<span asp-validation-for="Projects.Reporter" class="text-danger"></span>
+			</div>*@
+		<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Units.Types"></label>
+			</div>
+			<div class="col-5">
+				<select asp-for="@Model.Units.TypeCodeId" asp-items="Model.Types.ToSelectListItem(Model.Units.TypeCodeId)" class="form-control"></select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Units.Statuses"></label>
+			</div>
+			<div class="col-5">
+				<select asp-for="@Model.Units.StatusCodeId" asp-items="Model.Statuses.ToSelectListItem(Model.Units.StatusCodeId)" class="form-control"></select>
+			</div>
+		</div>
+		@*<div class="form-group row">
+				<div class="col-2">
+					<label asp-for="Projects.Priorities"></label>
+				</div>
+				<div class="col-5">
+					<select asp-for="@Model.Projects.PriorityId" asp-items="Model.Priorities.ToSelectListItem(Model.Projects.PriorityId)" class="form-control"></select>
+				</div>
+			</div>*@
+		@*<div class="form-group row">
+				<div class="col-2">
+					<label asp-for="Projects.Labels"></label>
+				</div>
+				<div class="col-5">
+					<select asp-for="@Model.Projects.LabelId" asp-items="Model.Labels.ToSelectListItem(Model.Projects.LabelId)" class="form-control"></select>
+				</div>
+			</div>*@
+		@*<div class="form-group row">
+				<div class="col-2">
+					<label asp-for="Projects.Categories"></label>
+				</div>
+				<div class="col-5">
+					<select asp-for="@Model.Projects.CategoryId" asp-items="Model.Categories.ToSelectListItem(Model.Projects.CategoryId)" class="form-control"></select>
+				</div>
+			</div>*@
+
+		<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="Units.Description"></label>
+			</div>
+			<div class="col-5">
+				<textarea asp-for="Units.Description" class="form-control"></textarea>
+			</div>
+			<span asp-validation-for="Units.Description" class="text-danger"></span>
+		</div>
+		<br />
+		<!--add two buttons-->
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary" value="Create" asp-route-id="@Model.Units.Id" />
+			<a asp-action="Index" asp-area="PowerUser" class="btn btn-success">Back to List</a>
+		</div>
+	</div>
+</form>
+
+@section Scripts{
+	@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -6,6 +6,7 @@ using Clm.Data;
 using Clm.Models.VIewModel;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
+using NewAgeClm.Utility;
 
 namespace Clm.Areas.RegularUser.Controllers
 {
@@ -30,9 +31,9 @@ namespace Clm.Areas.RegularUser.Controllers
 			};
 
 		}
-
+		
 		public IActionResult Index(int id)
-        {
+		{
 			var units = _db.Units.Where(m => m.Id == id).ToList();
 			if (units == null || units.Count == 0)
 				return NotFound();
@@ -41,6 +42,53 @@ namespace Clm.Areas.RegularUser.Controllers
 			return View(units[0]);
 		}
 
-	
+	/*	public IActionResult Index(int id)
+		{
+			var units = _db.Units.Where(m => m.Id == id).ToList();
+			var otherUnits = _db.Units.Where(m => m.ParentId == id).ToList();
+			otherUnits.Add(units[0]);
+
+
+			if (units == null || units.Count == 0)
+				return NotFound();			
+			return View(otherUnits);
+		}*/
+
+		//GET method for adding a story to project
+		public IActionResult Create(int id)
+		{
+			
+			UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m =>
+				m.Name != StaticData.DefaultDbValueTypeGlobalProject &&
+				m.Name != StaticData.DefaultDbValueTypeLocalProject &&
+				m.Name != StaticData.DefaultDbValueTypeSubTask);
+			
+			UnitsAttributesViewModel.Statuses = UnitsAttributesViewModel.Statuses
+				.Where(m =>
+				m.Name == StaticData.DefaultDbValueStatusBacklog);
+			UnitsAttributesViewModel.Units.Id = id;
+			return View(UnitsAttributesViewModel);
+		}
+
+		//Http POST create new unit
+		[HttpPost, ActionName("Create")]
+		[ValidateAntiForgeryToken]
+		public async Task <IActionResult> AddUnit(int id)
+		{
+			if(ModelState.IsValid)
+			{
+				UnitsAttributesViewModel.Units.ParentId = id;
+				_db.Add(UnitsAttributesViewModel.Units);
+				await _db.SaveChangesAsync();
+
+				return RedirectToAction("Create", id);
+			}
+
+			else
+			{
+				return BadRequest();
+			}
+		}
     }
 }
