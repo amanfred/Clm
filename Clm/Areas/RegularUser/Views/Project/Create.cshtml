@@ -16,12 +16,12 @@
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="form-group row">
 			<div class="col-2">
-				<label asp-for="Units.Name"></label>
+				<label asp-for="Unit.Name"></label>
 			</div>
 			<div class="col-5">
-				<input asp-for="Units.Name" class="form-control" />
+				<input asp-for="Unit.Name" class="form-control" />
 			</div>
-			<span asp-validation-for="Units.Name" class="text-danger"></span>
+			<span asp-validation-for="Unit.Name" class="text-danger"></span>
 		</div>
 		@*<div class="form-group row">
 				<div class="col-2">
@@ -52,18 +52,18 @@
 			</div>*@
 		<div class="form-group row">
 			<div class="col-2">
-				<label asp-for="Units.Types"></label>
+				<label asp-for="Unit.Types"></label>
 			</div>
 			<div class="col-5">
-				<select asp-for="@Model.Units.TypeCodeId" asp-items="Model.Types.ToSelectListItem(Model.Units.TypeCodeId)" class="form-control"></select>
+				<select asp-for="@Model.Unit.TypeCodeId" asp-items="Model.Types.ToSelectListItem(Model.Unit.TypeCodeId)" class="form-control"></select>
 			</div>
 		</div>
 		<div class="form-group row">
 			<div class="col-2">
-				<label asp-for="Units.Statuses"></label>
+				<label asp-for="Unit.Statuses"></label>
 			</div>
 			<div class="col-5">
-				<select asp-for="@Model.Units.StatusCodeId" asp-items="Model.Statuses.ToSelectListItem(Model.Units.StatusCodeId)" class="form-control"></select>
+				<select asp-for="@Model.Unit.StatusCodeId" asp-items="Model.Statuses.ToSelectListItem(Model.Unit.StatusCodeId)" class="form-control"></select>
 			</div>
 		</div>
 		@*<div class="form-group row">
@@ -93,17 +93,17 @@
 
 		<div class="form-group row">
 			<div class="col-2">
-				<label asp-for="Units.Description"></label>
+				<label asp-for="Unit.Description"></label>
 			</div>
 			<div class="col-5">
-				<textarea asp-for="Units.Description" class="form-control"></textarea>
+				<textarea asp-for="Unit.Description" class="form-control"></textarea>
 			</div>
-			<span asp-validation-for="Units.Description" class="text-danger"></span>
+			<span asp-validation-for="Unit.Description" class="text-danger"></span>
 		</div>
 		<br />
 		<!--add two buttons-->
 		<div class="form-group">
-			<input type="submit" class="btn btn-primary" value="Create" asp-route-id="@Model.Units.Id" />
+			<input type="submit" class="btn btn-primary" value="Create" asp-route-id="@Model.Unit.Id" />
 			<a asp-action="Index" asp-area="PowerUser" class="btn btn-success">Back to List</a>
 		</div>
 	</div>

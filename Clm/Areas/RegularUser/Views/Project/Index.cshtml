@@ -1,4 +1,4 @@
-﻿@model Clm.Models.Unit.Units
+﻿@model Clm.Models.VIewModel.UnitsAttributesViewModel
 @using Clm.Extensions
 
 @{
@@ -12,14 +12,14 @@
 
 
 <!--for file upload use enctype="multipart/form-data"-->
-<div class="p-4 border rounded">	
+<div class="p-4 border rounded">
 	<div class="form-group row">
 		<div class="col-2">
-			<label asp-for="Name"></label>
+			<label asp-for="Unit.Name"></label>
 		</div>
 		<div class="col-5">
-			<input asp-for="Name" class="form-control" disabled readonly />
-		</div>			
+			<input asp-for="Unit.Name" class="form-control" disabled readonly />
+		</div>
 	</div>
 	@*<div class="form-group row">
 			<div class="col-2">
@@ -53,7 +53,7 @@
 			<label asp-for="Types"></label>
 		</div>
 		<div class="col-5">
-			<input asp-for="@Model.Types.Name" class="form-control" disabled readonly />
+			<input asp-for="@Model.Unit.Types.Name" class="form-control" disabled readonly />
 		</div>
 	</div>
 	<div class="form-group row">
@@ -61,7 +61,7 @@
 			<label asp-for="Statuses"></label>
 		</div>
 		<div class="col-5">
-			<input asp-for="@Model.Statuses.Name" class="form-control" disabled readonly />
+			<input asp-for="@Model.Unit.Statuses.Name" class="form-control" disabled readonly />
 		</div>
 	</div>
 	@*<div class="form-group row">
@@ -91,22 +91,66 @@
 
 	<div class="form-group row">
 		<div class="col-2">
-			<label asp-for="Description"></label>
+			<label asp-for="Unit.Description"></label>
 		</div>
 		<div class="col-5">
-			<textarea asp-for="Description" class="form-control" disabled readonly></textarea>
-		</div>			
+			<textarea asp-for="Unit.Description" class="form-control" disabled readonly></textarea>
+		</div>
 	</div>
+
+
 	<br />
 	<!--add two buttons-->
 	<div class="form-group">
 		@*<input type="submit" class="btn btn-primary" value="Add" />*@
 		@*<a asp-action="Index" asp-area="PowerUser" class="btn btn-success">Back to List</a>*@
 		@*<button class="btn btn-primary">Add to project</button>*@
-		<a asp-controller="Project" asp-area="RegularUser" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-info" style="float:left;">
-			<i class=" fas fa-plus-square"></i>
+		<a asp-controller="Project" asp-area="RegularUser" asp-action="Create" asp-route-id="@Model.Unit.Id" class="btn btn-info" style="float:left;">
+			<i class=" fas fa-plus-square"></i>			
+		</a>
+		<a asp-controller="Project" asp-area="RegularUser" asp-action="Edit" asp-route-id="@Model.Unit.Id" class="btn btn-info" style="float:left;">
+			<i class=" fas fa-edit"></i>			
 		</a>
 	</div>
+	<br />
+	<hr />
+	<div>
+		<table class="table table-striped border">
+			<tr class="table-info">
+				<th>
+					<a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">
+						@Html.DisplayNameFor(m => m.Unit.Name)<!--Html helper-->
+						</a>
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.Unit.Statuses)
+				</th>				
+				<th>
+					@Html.DisplayNameFor(m => m.Unit.Types)
+				</th>
+			</tr>			
+			@foreach (var unit in Model.Units)
+			{				
+			<tr>
+				<td>
+					<a asp-controller="Project" asp-area="RegularUser" asp-action="Index" asp-route-id="@unit.Id">
+						@Html.DisplayFor(m => unit.Name)<!--Html helper-->
+					</a>
+					
+				</td>
+				<td>
+					@Html.DisplayFor(m => unit.Statuses.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(m => unit.Types.Name)
+				</td>
+				@*<td>*@
+					@*<partial name="_TableButtonsWithControllerPartial" model="controller" />*@
+			</tr>
+			}
+		</table>
+	</div>
+	
 </div>
 
 
