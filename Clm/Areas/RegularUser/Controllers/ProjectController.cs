@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Clm.Data;
+using Clm.Models.Unit;
 using Clm.Models.VIewModel;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
+using NewAgeClm.Utility;
 
 namespace Clm.Areas.RegularUser.Controllers
 {
@@ -26,13 +28,13 @@ namespace Clm.Areas.RegularUser.Controllers
 			{
 				Types = _db.Types.ToList(),
 				Statuses = _db.Statuses.ToList(),
-				Units = new Models.Unit.Units()
+				Unit = new Units()
 			};
 
 		}
-
+		/*
 		public IActionResult Index(int id)
-        {
+		{
 			var units = _db.Units.Where(m => m.Id == id).ToList();
 			if (units == null || units.Count == 0)
 				return NotFound();
@@ -40,7 +42,100 @@ namespace Clm.Areas.RegularUser.Controllers
 				return BadRequest();
 			return View(units[0]);
 		}
+		*/
+		public async Task<IActionResult> Index(int id, string sortOrder)
+		{
+			//define sort order options
+			ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-	
-    }
+			//We get the project
+			UnitsAttributesViewModel.Unit = await _db.Units.FindAsync(id);			
+
+			//These are all the project's children
+			UnitsAttributesViewModel.Units = _db.Units.Where(m => m.ParentId == id).ToList();
+
+			if (UnitsAttributesViewModel.Unit == null)
+				return NotFound();
+
+			switch (sortOrder)
+			{
+				case "name_desc":
+					UnitsAttributesViewModel.Units = UnitsAttributesViewModel.Units.OrderByDescending(s => s.Name);
+					break;
+				default:
+					UnitsAttributesViewModel.Units = UnitsAttributesViewModel.Units.OrderBy(s => s.Name);
+					break;
+			}
+
+			return View(UnitsAttributesViewModel);
+		}
+
+		//GET method for adding a story to project
+		public IActionResult Create(int id)
+		{
+			
+			UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m =>
+				m.Name != StaticData.DefaultDbValueTypeGlobalProject &&
+				m.Name != StaticData.DefaultDbValueTypeLocalProject &&
+				m.Name != StaticData.DefaultDbValueTypeSubTask);
+			
+			UnitsAttributesViewModel.Statuses = UnitsAttributesViewModel.Statuses
+				.Where(m =>
+				m.Name == StaticData.DefaultDbValueStatusBacklog);
+			UnitsAttributesViewModel.Unit.Id = id;
+			return View(UnitsAttributesViewModel);
+		}
+
+		//Http POST create new unit
+		[HttpPost, ActionName("Create")]
+		[ValidateAntiForgeryToken]
+		public async Task <IActionResult> AddUnit(int id)
+		{
+			if(ModelState.IsValid)
+			{
+				UnitsAttributesViewModel.Unit.ParentId = id;
+				_db.Add(UnitsAttributesViewModel.Unit);
+				await _db.SaveChangesAsync();
+
+				return RedirectToAction("Create", id);
+			}
+
+			else
+			{
+				return BadRequest();
+			}
+		}
+
+		//GET method for edit
+		public async Task<IActionResult> Edit(int? id)
+		{
+			if (id == null || id < 0)
+				return NotFound();
+
+			var unit = await _db.Units.FindAsync(id);
+
+			if (unit == null)
+				return NotFound();
+
+			var type = unit.Types.Name;
+			switch (type)
+			{
+				case StaticData.DefaultDbValueTypeEpic:
+					UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+					.Where(m =>
+					m.Name != StaticData.DefaultDbValueTypeGlobalProject &&
+					m.Name != StaticData.DefaultDbValueTypeLocalProject &&
+					m.Name != StaticData.DefaultDbValueTypeSubTask);
+					break;
+
+				default:
+					break;
+			}
+
+			UnitsAttributesViewModel.Unit = unit;
+			
+			return View(this.UnitsAttributesViewModel);
+		}
+	}
 }

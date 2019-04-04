@@ -22,11 +22,13 @@ namespace Clm.Models.Unit
 		public int TypeCodeId { get; set; }
 
 		[ForeignKey("TypeCodeId")]
+		[Display(Name = "Type")]
 		public virtual Types Types { get; set; }
 
 		public int StatusCodeId { get; set; }
 
 		[ForeignKey("StatusCodeId")]
+		[Display(Name = "Status")]
 		public virtual Statuses Statuses { get; set; }
 	}
 }

@@ -28,7 +28,7 @@ namespace Clm.Areas.PowerUser.Controllers
 			{				
 				Types = _db.Types.ToList(),
 				Statuses = _db.Statuses.ToList(),
-				Units = new Models.Unit.Units()
+				Unit = new Models.Unit.Units()
 			};
 
 		}
@@ -65,8 +65,8 @@ namespace Clm.Areas.PowerUser.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-					UnitsAttributesViewModel.Units.ParentId = -1;
-					_db.Add(UnitsAttributesViewModel.Units);
+					UnitsAttributesViewModel.Unit.ParentId = -1;
+					_db.Add(UnitsAttributesViewModel.Unit);
 					await _db.SaveChangesAsync();
 
 					//Saving Image
@@ -74,7 +74,7 @@ namespace Clm.Areas.PowerUser.Controllers
 					string webRootPath = _hostingEnvironment.WebRootPath;
 					//rename the image to projects id
 					var files = HttpContext.Request.Form.Files;
-					var projectsFromDb = _db.Units.Find(UnitsAttributesViewModel.Units.Id);
+					var projectsFromDb = _db.Units.Find(UnitsAttributesViewModel.Unit.Id);
 					/*
 										if(files.Count > 0)
 										{
@@ -118,7 +118,7 @@ namespace Clm.Areas.PowerUser.Controllers
 				if (unit == null)
 					return NotFound();
 
-			UnitsAttributesViewModel.Units = unit;
+			UnitsAttributesViewModel.Unit = unit;
 			UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
 				.Where(m =>
 				m.Name == StaticData.DefaultDbValueTypeGlobalProject ||
@@ -132,11 +132,11 @@ namespace Clm.Areas.PowerUser.Controllers
 		{
 			if(ModelState.IsValid)
 			{
-				var projectFromDb = _db.Units.Where(m => m.Id == UnitsAttributesViewModel.Units.Id).FirstOrDefault();
-				projectFromDb.Name = UnitsAttributesViewModel.Units.Name;
-				projectFromDb.StatusCodeId = UnitsAttributesViewModel.Units.StatusCodeId;
-				projectFromDb.TypeCodeId = UnitsAttributesViewModel.Units.TypeCodeId;
-				projectFromDb.Description = UnitsAttributesViewModel.Units.Description;
+				var projectFromDb = _db.Units.Where(m => m.Id == UnitsAttributesViewModel.Unit.Id).FirstOrDefault();
+				projectFromDb.Name = UnitsAttributesViewModel.Unit.Name;
+				projectFromDb.StatusCodeId = UnitsAttributesViewModel.Unit.StatusCodeId;
+				projectFromDb.TypeCodeId = UnitsAttributesViewModel.Unit.TypeCodeId;
+				projectFromDb.Description = UnitsAttributesViewModel.Unit.Description;
 				await _db.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}

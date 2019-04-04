@@ -8,10 +8,14 @@ namespace Clm.Models.VIewModel
 {
 	public class UnitsAttributesViewModel
 	{
-		public Units Units { get; set; }
+		public Units Unit { get; set; }
+
+		public IEnumerable<Units> Units { get; set; }
 
 		public IEnumerable<Types> Types { get; set; }
 
 		public IEnumerable<Statuses> Statuses { get; set; }
+
+		
 	}
 }

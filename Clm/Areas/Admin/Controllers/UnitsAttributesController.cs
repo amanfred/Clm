@@ -21,7 +21,7 @@ namespace Clm.Areas.Admin.Controllers
 			this._db = db;
 			UnitsAttributesVM = new UnitsAttributesViewModel
 			{
-				Units = new Units(), //instance of units
+				Unit = new Units(), //instance of units
 				Types = db.Types.ToList(), //get types from the database
 				Statuses = db.Statuses.ToList() //get statuses from the database
 			};
