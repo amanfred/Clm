@@ -1,5 +1,6 @@
 ﻿@model Clm.Models.VIewModel.UnitsAttributesViewModel
 @using Clm.Extensions
+@using NewAgeClm.Utility;
 
 @{
 	ViewData["Title"] = "Create";
@@ -106,15 +107,19 @@
 		@*<a asp-action="Index" asp-area="PowerUser" class="btn btn-success">Back to List</a>*@
 		@*<button class="btn btn-primary">Add to project</button>*@
 		<a asp-controller="Project" asp-area="RegularUser" asp-action="Create" asp-route-id="@Model.Unit.Id"
-		data-toggle="tooltip" data-placement="top" title="Add new feature" class="btn btn-info" style="float:left;">
-			<i class=" fas fa-plus-square"></i>			
+		   data-toggle="tooltip" data-placement="top" title="Add new feature" class="btn btn-info">
+			<i class=" fas fa-plus-square"></i>
 		</a>
-		<a asp-controller="Project" asp-area="RegularUser" asp-action="Edit" asp-route-id="@Model.Unit.Id" 
-		data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-primary" style="float:left;">
-			<i class="fas fa-edit"></i>			
-		</a>
-	</div>
-	<br />
+		@if (Model.Unit.Types.Name != StaticData.DefaultDbValueTypeGlobalProject &&
+		   Model.Unit.Types.Name != StaticData.DefaultDbValueTypeLocalProject)
+		{
+			<a asp-controller="Project" asp-area="RegularUser" asp-action="Edit" asp-route-id="@Model.Unit.Id"
+			   data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-primary">
+				<i class="fas fa-edit"></i>
+			</a>
+		}
+
+	</div>	
 	<hr />
 	<div>
 		<table class="table table-striped border">

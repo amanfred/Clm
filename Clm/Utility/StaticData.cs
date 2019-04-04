@@ -26,5 +26,9 @@ namespace NewAgeClm.Utility
 		public const string DefaultDbValueStatusInTest = "In test";
 		public const string DefaultDbValueStatusReadyToRelease = "Ready to release";
 		public const string DefaultDbValueStatusDone = "Done";
+
+		//Action strings
+		public const string ActionValueNameDesc = "name_desc";
+		public const string ActionValueNameSortParameter = "NameSortParm";
 	}
 }

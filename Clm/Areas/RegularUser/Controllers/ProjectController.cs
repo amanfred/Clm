@@ -46,7 +46,7 @@ namespace Clm.Areas.RegularUser.Controllers
 		public async Task<IActionResult> Index(int id, string sortOrder)
 		{
 			//define sort order options
-			ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+			ViewData[StaticData.ActionValueNameSortParameter] = String.IsNullOrEmpty(sortOrder) ? StaticData.ActionValueNameDesc : String.Empty;
 
 			//We get the project
 			UnitsAttributesViewModel.Unit = await _db.Units.FindAsync(id);			
@@ -59,7 +59,7 @@ namespace Clm.Areas.RegularUser.Controllers
 
 			switch (sortOrder)
 			{
-				case "name_desc":
+				case StaticData.ActionValueNameDesc:
 					UnitsAttributesViewModel.Units = UnitsAttributesViewModel.Units.OrderByDescending(s => s.Name);
 					break;
 				default:
@@ -136,6 +136,25 @@ namespace Clm.Areas.RegularUser.Controllers
 			UnitsAttributesViewModel.Unit = unit;
 			
 			return View(this.UnitsAttributesViewModel);
+		}
+
+		[HttpPost, ActionName("Edit")]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> EditSubUnit(int? id)
+		{
+			if (ModelState.IsValid)
+			{
+				var projectFromDb = _db.Units.Where(m => m.Id == UnitsAttributesViewModel.Unit.Id).FirstOrDefault();
+				projectFromDb.Name = UnitsAttributesViewModel.Unit.Name;
+				projectFromDb.StatusCodeId = UnitsAttributesViewModel.Unit.StatusCodeId;
+				projectFromDb.TypeCodeId = UnitsAttributesViewModel.Unit.TypeCodeId;
+				projectFromDb.Description = UnitsAttributesViewModel.Unit.Description;
+				await _db.SaveChangesAsync();
+				var s = String.Empty;
+				return RedirectToAction(nameof(Index), new {id, String.Empty });
+				
+			}
+			return BadRequest();
 		}
 	}
 }
