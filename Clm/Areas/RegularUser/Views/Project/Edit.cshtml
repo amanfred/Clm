@@ -111,7 +111,10 @@
 		<br />
 		<!--add two buttons-->
 		<div class="form-group">
-			<input type="submit" id="Update" class="btn btn-primary" value="Update" asp-area="RegularUser" asp-route-id="@Model.Unit.Id" />			
+			<button type="submit" id="Update" class="btn btn-primary" value="Update" asp-area="RegularUser" asp-route-id="@Model.Unit.Id"
+				data-toggle="tooltip" data-placement="top" title="Save changes">
+				<i class="fas fa-save"></i>
+			</button>			
 			<a asp-controller="Project" asp-area="RegularUser" asp-action="Index" asp-route-id="@Model.Unit.Id"
 			   data-toggle="tooltip" data-placement="top" title="Back" class="btn btn-secondary">
 				<i class="fas fa-arrow-circle-left"></i>

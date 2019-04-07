@@ -103,7 +103,10 @@
 		<br />
 		<!--add two buttons-->
 		<div class="form-group">
-			<input type="submit" class="btn btn-primary" value="Create" />			
+			<button type="submit" class="btn btn-primary" value="Create" 
+					data-toggle="tooltip" data-placement="top" title="Create">
+				<i class="fas fa-save"></i>
+			</button>
 			<a asp-controller="Project" asp-area="PowerUser" asp-action="Index" 
 			   data-toggle="tooltip" data-placement="top" title="Back" class="btn btn-secondary">
 				<i class="fas fa-arrow-circle-left"></i>

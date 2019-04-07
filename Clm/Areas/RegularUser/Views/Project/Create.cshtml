@@ -102,8 +102,12 @@
 		</div>
 		<br />
 		<!--add two buttons-->
-		<div class="form-group">
-			<input type="submit" class="btn btn-primary" value="Create" asp-route-id="@Model.Unit.Id" />			
+		<div class="form-group">			
+			<button type="submit" class="btn btn-success"  value="Create" asp-route-id="@Model.Unit.Id"
+			data-toggle="tooltip" data-placement="top" title="Create">
+				<i class="fas fa-save"></i>
+			</button>
+
 			<a asp-controller="Project" asp-area="RegularUser" asp-action="Index" asp-route-id="@Model.Unit.Id"
 			   data-toggle="tooltip" data-placement="top" title="Back" class="btn btn-secondary">
 				<i class="fas fa-arrow-circle-left"></i>
