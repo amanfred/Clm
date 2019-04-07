@@ -107,7 +107,7 @@
 		@*<a asp-action="Index" asp-area="PowerUser" class="btn btn-success">Back to List</a>*@
 		@*<button class="btn btn-primary">Add to project</button>*@
 		@if (Model.Unit.Types.Name != StaticData.DefaultDbValueTypeSubTask &&
-		Model.Unit.Types.Name != StaticData.DefaultDbValueTypeTask)
+ Model.Unit.Types.Name != StaticData.DefaultDbValueTypeTask)
 		{
 			<a asp-controller="Project" asp-area="RegularUser" asp-action="Create" asp-route-id="@Model.Unit.Id"
 			   data-toggle="tooltip" data-placement="top" title="Add new feature" class="btn btn-info">
@@ -115,13 +115,27 @@
 			</a>
 		}
 		@if (Model.Unit.Types.Name != StaticData.DefaultDbValueTypeGlobalProject &&
-		   Model.Unit.Types.Name != StaticData.DefaultDbValueTypeLocalProject)
+	Model.Unit.Types.Name != StaticData.DefaultDbValueTypeLocalProject)
 		{
 			<a asp-controller="Project" asp-area="RegularUser" asp-action="Edit" asp-route-id="@Model.Unit.Id"
 			   data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-primary">
 				<i class="fas fa-edit"></i>
 			</a>
+			<a asp-controller="Project" asp-area="RegularUser" asp-action="Index" asp-route-id="@Model.Unit.ParentId"
+			   data-toggle="tooltip" data-placement="top" title="Back" class="btn btn-secondary">
+				<i class="fas fa-arrow-circle-left"></i>
+			</a>
 		}
+		@if (Model.Unit.Types.Name == StaticData.DefaultDbValueTypeGlobalProject ||
+	 Model.Unit.Types.Name == StaticData.DefaultDbValueTypeLocalProject)
+		{
+			<a asp-controller="Project" asp-area="PowerUser" asp-action="Index"
+			   data-toggle="tooltip" data-placement="top" title="Back" class="btn btn-secondary">
+				<i class="fas fa-arrow-circle-left"></i>
+			</a>
+		}
+
+
 
 	</div>	
 	<hr />

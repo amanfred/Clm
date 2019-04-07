@@ -111,8 +111,11 @@
 		<br />
 		<!--add two buttons-->
 		<div class="form-group">
-			<input type="submit" id="Update" class="btn btn-primary" value="Update"  asp-area="RegularUser" asp-route-id="@Model.Unit.Id" />
-			<a asp-action="Index" asp-area="RegularUser" class="btn btn-success">Back to List</a>
+			<input type="submit" id="Update" class="btn btn-primary" value="Update" asp-area="RegularUser" asp-route-id="@Model.Unit.Id" />			
+			<a asp-controller="Project" asp-area="RegularUser" asp-action="Index" asp-route-id="@Model.Unit.Id"
+			   data-toggle="tooltip" data-placement="top" title="Back" class="btn btn-secondary">
+				<i class="fas fa-arrow-circle-left"></i>
+			</a>
 		</div>
 	</div>
 </form>
