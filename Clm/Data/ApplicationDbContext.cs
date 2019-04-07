@@ -43,12 +43,16 @@ namespace Clm.Data
 					IsEnabled = true,
 					CodeId = 4,
 					Name = StaticData.DefaultDbValueTypeUserStory
-				}
-				, new Types
+				}, new Types
 				{
 					IsEnabled = true,
 					CodeId = 5,
 					Name = StaticData.DefaultDbValueTypeSubTask
+				}, new Types
+				{
+					IsEnabled = true,
+					CodeId = 6,
+					Name = StaticData.DefaultDbValueTypeTask
 				}
 				);
 

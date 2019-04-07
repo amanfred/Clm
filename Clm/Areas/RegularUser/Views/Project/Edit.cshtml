@@ -1,5 +1,6 @@
 ﻿@model Clm.Models.VIewModel.UnitsAttributesViewModel
 @using Clm.Extensions
+@using NewAgeClm.Utility
 
 @{
 	ViewData["Title"] = "Edit";
@@ -7,9 +8,8 @@
 
 <br />
 <h2 class="text-info">
-	Edit project
+	@Model.Unit.Name
 </h2>
-
 <form method="post" asp-action="Edit">
 	<input type="hidden" asp-for="Unit.Id" />
 	<!--for file upload use enctype="multipart/form-data"-->
@@ -56,7 +56,14 @@
 				<label asp-for="Unit.Types"></label>
 			</div>
 			<div class="col-5">
-				<select asp-for="@Model.Unit.TypeCodeId" asp-items="Model.Types.ToSelectListItem(Model.Unit.TypeCodeId)" class="form-control"></select>
+				@if (@Model.Unit.Types.Name == StaticData.DefaultDbValueTypeEpic)
+				{
+					<select asp-for="@Model.Unit.TypeCodeId" asp-items="Model.Types.ToSelectListItem(Model.Unit.TypeCodeId)" readonly class="form-control"></select>
+				}				
+				else
+				{
+					<select asp-for="@Model.Unit.TypeCodeId" asp-items="Model.Types.ToSelectListItem(Model.Unit.TypeCodeId)" class="form-control"></select>
+				}
 			</div>
 		</div>
 		<div class="form-group row">

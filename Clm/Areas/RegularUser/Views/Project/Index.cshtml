@@ -106,10 +106,14 @@
 		@*<input type="submit" class="btn btn-primary" value="Add" />*@
 		@*<a asp-action="Index" asp-area="PowerUser" class="btn btn-success">Back to List</a>*@
 		@*<button class="btn btn-primary">Add to project</button>*@
-		<a asp-controller="Project" asp-area="RegularUser" asp-action="Create" asp-route-id="@Model.Unit.Id"
-		   data-toggle="tooltip" data-placement="top" title="Add new feature" class="btn btn-info">
-			<i class=" fas fa-plus-square"></i>
-		</a>
+		@if (Model.Unit.Types.Name != StaticData.DefaultDbValueTypeSubTask &&
+		Model.Unit.Types.Name != StaticData.DefaultDbValueTypeTask)
+		{
+			<a asp-controller="Project" asp-area="RegularUser" asp-action="Create" asp-route-id="@Model.Unit.Id"
+			   data-toggle="tooltip" data-placement="top" title="Add new feature" class="btn btn-info">
+				<i class=" fas fa-plus-square"></i>
+			</a>
+		}
 		@if (Model.Unit.Types.Name != StaticData.DefaultDbValueTypeGlobalProject &&
 		   Model.Unit.Types.Name != StaticData.DefaultDbValueTypeLocalProject)
 		{

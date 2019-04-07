@@ -71,15 +71,67 @@ namespace Clm.Areas.RegularUser.Controllers
 		}
 
 		//GET method for adding a story to project
-		public IActionResult Create(int id)
+		public async Task<IActionResult> Create(int id)
 		{
-			
-			UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+			if (id == -1) //project
+			{
+				//Do something for the project
+			}
+
+			var parent = await _db.Units.FindAsync(id);
+
+			if (parent == null)
+				return NotFound();
+			 
+			else if (parent.Types.Name == StaticData.DefaultDbValueTypeEpic)
+			{
+				UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
 				.Where(m =>
 				m.Name != StaticData.DefaultDbValueTypeGlobalProject &&
 				m.Name != StaticData.DefaultDbValueTypeLocalProject &&
+				m.Name != StaticData.DefaultDbValueTypeEpic &&
 				m.Name != StaticData.DefaultDbValueTypeSubTask);
-			
+			}
+
+			else if (parent.Types.Name == StaticData.DefaultDbValueTypeUserStory)
+			{
+				UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m =>
+				m.Name != StaticData.DefaultDbValueTypeGlobalProject &&
+				m.Name != StaticData.DefaultDbValueTypeLocalProject &&
+				m.Name != StaticData.DefaultDbValueTypeEpic &&
+				m.Name != StaticData.DefaultDbValueTypeUserStory);
+			}
+
+			else if (parent.Types.Name == StaticData.DefaultDbValueTypeTask)
+			{
+				UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m =>
+				m.Name != StaticData.DefaultDbValueTypeGlobalProject &&
+				m.Name != StaticData.DefaultDbValueTypeLocalProject &&
+				m.Name != StaticData.DefaultDbValueTypeEpic &&
+				m.Name != StaticData.DefaultDbValueTypeSubTask &&
+				m.Name != StaticData.DefaultDbValueTypeTask);
+			}
+
+			else if (parent.Types.Name == StaticData.DefaultDbValueTypeSubTask)
+			{
+				UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m =>
+				m.Name == StaticData.DefaultDbValueTypeSubTask);
+			}
+
+			else if (parent.Types.Name == StaticData.DefaultDbValueTypeGlobalProject ||
+					 parent.Types.Name == StaticData.DefaultDbValueTypeLocalProject)
+			{
+				UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+				.Where(m =>
+				m.Name == StaticData.DefaultDbValueTypeGlobalProject ||
+				m.Name == StaticData.DefaultDbValueTypeLocalProject);
+			}
+
+			UnitsAttributesViewModel.ParentName = parent.Types.Name + ": " + parent.Name;
+
 			UnitsAttributesViewModel.Statuses = UnitsAttributesViewModel.Statuses
 				.Where(m =>
 				m.Name == StaticData.DefaultDbValueStatusBacklog);
@@ -124,11 +176,17 @@ namespace Clm.Areas.RegularUser.Controllers
 				case StaticData.DefaultDbValueTypeEpic:
 					UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
 					.Where(m =>
-					m.Name != StaticData.DefaultDbValueTypeGlobalProject &&
-					m.Name != StaticData.DefaultDbValueTypeLocalProject &&
-					m.Name != StaticData.DefaultDbValueTypeSubTask);
+					m.Name == StaticData.DefaultDbValueTypeEpic);
+					UnitsAttributesViewModel.Statuses = UnitsAttributesViewModel.Statuses
+					.Where(m =>
+					m.Name != StaticData.DefaultDbValueStatusReadyToQA &&
+					m.Name != StaticData.DefaultDbValueStatusInTest);
 					break;
-
+				case StaticData.DefaultDbValueTypeUserStory:
+					UnitsAttributesViewModel.Types = UnitsAttributesViewModel.Types
+					.Where(m => m.Name == StaticData.DefaultDbValueTypeTask ||
+						   m.Name == StaticData.DefaultDbValueTypeUserStory);
+					break;
 				default:
 					break;
 			}
@@ -146,8 +204,10 @@ namespace Clm.Areas.RegularUser.Controllers
 			{
 				var projectFromDb = _db.Units.Where(m => m.Id == UnitsAttributesViewModel.Unit.Id).FirstOrDefault();
 				projectFromDb.Name = UnitsAttributesViewModel.Unit.Name;
-				projectFromDb.StatusCodeId = UnitsAttributesViewModel.Unit.StatusCodeId;
-				projectFromDb.TypeCodeId = UnitsAttributesViewModel.Unit.TypeCodeId;
+				if (UnitsAttributesViewModel.Unit.StatusCodeId != 0)
+					projectFromDb.StatusCodeId = UnitsAttributesViewModel.Unit.StatusCodeId;
+				if (UnitsAttributesViewModel.Unit.TypeCodeId != 0)
+					projectFromDb.TypeCodeId = UnitsAttributesViewModel.Unit.TypeCodeId;
 				projectFromDb.Description = UnitsAttributesViewModel.Unit.Description;
 				await _db.SaveChangesAsync();
 				var s = String.Empty;
