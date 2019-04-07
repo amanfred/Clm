@@ -17,6 +17,7 @@ namespace Clm.Data
 		public DbSet<Units> Units { get; set; }
 		public DbSet<Types> Types { get; set; }
 		public DbSet<Statuses> Statuses { get; set; }
+		public DbSet<Severities> Severities { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -93,6 +94,41 @@ namespace Clm.Data
 					IsEnabled = true,
 					CodeId = 7,
 					Name = StaticData.DefaultDbValueStatusDone
+				}
+				);
+
+			base.OnModelCreating(builder);
+			builder.Entity<Severities>()
+				.HasData(new Severities
+				{
+					IsEnabled = true,
+					CodeId = 1,
+					Name = StaticData.DefaultDbValueSeverityBlocker
+				}, new Severities
+				{
+					IsEnabled = true,
+					CodeId = 2,
+					Name = StaticData.DefaultDbValueSeverityCritical
+				}, new Severities
+				{
+					IsEnabled = true,
+					CodeId = 3,
+					Name = StaticData.DefaultDbValueSeverityMajor
+				}, new Severities
+				{
+					IsEnabled = true,
+					CodeId = 4,
+					Name = StaticData.DefaultDbValueSeverityMinor
+				}, new Severities
+				{
+					IsEnabled = true,
+					CodeId = 5,
+					Name = StaticData.DefaultDbValueSeverityTrivial
+				}, new Severities
+				{
+					IsEnabled = true,
+					CodeId = 6,
+					Name = StaticData.DefaultStringNone
 				}
 				);
 		}

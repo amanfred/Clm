@@ -30,5 +30,11 @@ namespace Clm.Models.Unit
 		[ForeignKey("StatusCodeId")]
 		[Display(Name = "Status")]
 		public virtual Statuses Statuses { get; set; }
+
+		public int SeverityCodeId { get; set; }
+
+		[ForeignKey("SeverityCodeId")]
+		[Display(Name = "Severity")]
+		public virtual Severities Severities { get; set; }
 	}
 }

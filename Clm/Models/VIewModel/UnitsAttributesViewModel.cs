@@ -16,6 +16,8 @@ namespace Clm.Models.VIewModel
 
 		public IEnumerable<Statuses> Statuses { get; set; }
 
+		public IEnumerable<Severities> Severities { get; set; }
+
 		public string ParentName { get; set; }
 
 
