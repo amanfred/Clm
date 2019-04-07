@@ -10,7 +10,7 @@ namespace Clm.Data.Migrations
                 name: "SeverityCodeId",
                 table: "Units",
                 nullable: false,
-                defaultValue: 6);
+                defaultValue: 100);
 
             migrationBuilder.CreateTable(
                 name: "Severities",

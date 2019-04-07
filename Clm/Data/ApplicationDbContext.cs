@@ -18,6 +18,7 @@ namespace Clm.Data
 		public DbSet<Types> Types { get; set; }
 		public DbSet<Statuses> Statuses { get; set; }
 		public DbSet<Severities> Severities { get; set; }
+		public DbSet<Priorities> Priorities { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -127,7 +128,37 @@ namespace Clm.Data
 				}, new Severities
 				{
 					IsEnabled = true,
-					CodeId = 6,
+					CodeId = 100,
+					Name = StaticData.DefaultStringNone
+				}
+				);
+
+			base.OnModelCreating(builder);
+			builder.Entity<Priorities>()
+				.HasData(new Priorities
+				{
+					IsEnabled = true,
+					CodeId = 1,
+					Name = StaticData.DefaultDbValuePriorityMustHave
+				}, new Priorities
+				{
+					IsEnabled = true,
+					CodeId = 2,
+					Name = StaticData.DefaultDbValuePriorityShouldHave
+				}, new Priorities
+				{
+					IsEnabled = true,
+					CodeId = 3,
+					Name = StaticData.DefaultDbValuePriorityCouldHave
+				}, new Priorities
+				{
+					IsEnabled = true,
+					CodeId = 4,
+					Name = StaticData.DefaultDbValuePriorityWontHave
+				}, new Priorities				
+				{
+					IsEnabled = true,
+					CodeId = 100,
 					Name = StaticData.DefaultStringNone
 				}
 				);

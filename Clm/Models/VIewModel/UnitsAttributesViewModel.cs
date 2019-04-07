@@ -18,6 +18,8 @@ namespace Clm.Models.VIewModel
 
 		public IEnumerable<Severities> Severities { get; set; }
 
+		public IEnumerable<Priorities> Priorities { get; set; }
+
 		public string ParentName { get; set; }
 
 

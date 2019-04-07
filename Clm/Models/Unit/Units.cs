@@ -36,5 +36,11 @@ namespace Clm.Models.Unit
 		[ForeignKey("SeverityCodeId")]
 		[Display(Name = "Severity")]
 		public virtual Severities Severities { get; set; }
+		
+		public int PriorityCodeId { get; set; }
+
+		[ForeignKey("PriorityCodeId")]
+		[Display(Name = "Priority")]
+		public virtual Priorities Priorities { get; set; }
 	}
 }
